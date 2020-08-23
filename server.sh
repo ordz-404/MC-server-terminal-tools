@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo "Initialising..."
+
+# Set folder to root directory, this allows script execution from external directories 
+cd $(dirname $0)
+
 if [ -e "serverconf.sh" ]
 then
 	source "serverconf.sh"
@@ -235,6 +240,8 @@ function ls_bup() {
 }
 
 #cd $(dirname $0)
+
+
 
 case $1 in
 	"start")

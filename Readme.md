@@ -1,5 +1,5 @@
 # minecraft-server-tools by Jonas Gunz 
-Source code original: https://github.com/kompetenzbolzen/minecraft-server-tools
+Original Source code: https://github.com/kompetenzbolzen/minecraft-server-tools
 
 ## Patch Notes 1.01 - 08/23/2020
 

@@ -7,9 +7,14 @@ File - Server.sh
 
 * cd $(dirname $0) sets the current folder server.sh file resides in as the root folder. This enables the code to be executed outside the root residing folder, resolving the issue of the minecraft service not starting up.
 
+File - Serverconf.sh
+
+* The file has been tidied up for easier referencing. All main setup parameters have been separated under the `Server Config Params` section in the config file.
+
+
 ## Setup & Configuration Parameters
 
-All configuration parameters are located in serverconf.sh
+Please open up the serverconf.sh to complete the setup. The only main four parameters you need to configure are specified below.
 
 `JVM_ARGS="-Xms1024M -Xmx1024M"`
 

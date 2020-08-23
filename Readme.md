@@ -1,5 +1,9 @@
-# minecraft-server-tools by Jonas Gunz 
+# Minecraft-server-tools by Jonas Gunz 
 Original Source code: https://github.com/kompetenzbolzen/minecraft-server-tools
+
+## Platform Compatability
+Tested on Ubuntu 18.04
+Platform: AWS
 
 ## Patch Notes 1.01 - 08/23/2020
 
@@ -13,7 +17,7 @@ File - Serverconf.sh
 
 File - minecraft.service
 
-* This file has been simplifed and modified to run with this current version (branch) of this code.
+* This file has been simplifed and modified to run with this current version (branch) of this code. The original file has been moved to the "old_source" sub directory.
 
 ## Setup & Configuration Parameters
 
@@ -28,22 +32,22 @@ Please open up the serverconf.sh to complete the setup. The only main four param
 `WORLD_NAME="insert_world_name"`
 
 
-## Usage
+## Usage Parameters
 
 `./server.sh start|stop|attach|status|backup`
 
 ### start
 
-Creates a `screen` session and starts a minecraft server within.
-Fails, if a session is already running with the same sessionname.
+Creates a terminal multiplxer (tmux is different from screen) session and starts a minecraft server within.
+If a current instance is already running, the server will indicate. 
 
 ### stop
 
-Sends `stop` command to running server instance to safely shut down.
+Sends `stop` command to running minecraft server instance to safely shut down.
 
 ### attach
 
-attaches to `screen` session. Exit with `CTRL + A d`
+Running with the `attach` attaches to `screen` session. Exit with `CTRL + A d`
 
 ### status
 

@@ -1,23 +1,25 @@
 # serverconf.sh
-# configuration file for server.sh minecraft server 
+# Config file for server.sh executable
 # management script
 
-#CONFIG
+#JRE-RUNTIME
 JRE_JAVA="java"
-JVM_ARGS="-Xms4096M -Xmx6144M" 
-JAR="fabric-server-launch.jar"
-JAR_ARGS="-nogui"
 
+#Server Config Params
+JAR="insert-minecraft-server-executable-name.jar"
+JVM_ARGS="-Xms1024M -Xmx1024M" 
+JAR_ARGS="-nogui"
+WORLD_NAME="insert-world-name"
+
+#TMUX - Terminal Multipliexer settings
 TMUX_WINDOW="minecraft"
 TMUX_SOCKET="mc_tmux_socket"
+PIDFILE="minecraft-session.pid"
 
-WORLD_NAME="lfja"
-
+#Backup Settings
 BACKUP_NAME="${WORLD_NAME}_backup"
 LOGFILE="logs/latest.log"
-PIDFILE="server-screen.pid"
 USE_BUP="NO"
 
 #Constants
 CUR_YEAR=`date +"%Y"`
-

@@ -47,7 +47,7 @@ Sends `stop` command to running minecraft server instance to safely shut down.
 
 ### attach
 
-Running with the `attach` attaches to `screen` session. Exit with `CTRL + A d`
+Re attaches to a TMUX screen session if the server is running. To exit, press `CTRL + B ` together follwed by `b` key.
 
 ### status
 

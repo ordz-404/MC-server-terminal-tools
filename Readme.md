@@ -8,14 +8,14 @@ File - Server.sh
 
 ## Setup & Configuration Parameters
 
-All configuration parameters are located in serverconf.sh 
+All configuration parameters are located in serverconf.sh
 
-JVM_ARGS="-Xms1024M -Xmx1024M" 
-JAR="insert_server_excutable_name.jar"
-JAR_ARGS="-nogui"
-TMUX_WINDOW="minecraft"
-TMUX_SOCKET="mc_tmux_socket"
-WORLD_NAME="insert_world_name"
+`JVM_ARGS="-Xms1024M -Xmx1024M"`
+`JAR="insert_server_excutable_name.jar"`
+`JAR_ARGS="-nogui"`
+`TMUX_WINDOW="minecraft"`
+`TMUX_SOCKET="mc_tmux_socket"`
+`WORLD_NAME="insert_world_name"`
 
 
 ## Usage

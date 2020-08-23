@@ -3,6 +3,7 @@ Original Source code: https://github.com/kompetenzbolzen/minecraft-server-tools
 
 ## Platform Compatability
 Tested on Ubuntu 18.04
+
 Platform: AWS
 
 ## Patch Notes 1.01 - 08/23/2020

@@ -11,6 +11,9 @@ File - Serverconf.sh
 
 * The file has been tidied up for easier referencing. All main setup parameters have been separated under the `Server Config Params` section in the config file.
 
+File - minecraft.service
+
+* This file has been simplifed and modified to run with this current version (branch) of this code.
 
 ## Setup & Configuration Parameters
 

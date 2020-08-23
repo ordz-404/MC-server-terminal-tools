@@ -3,9 +3,8 @@ Source code original: https://github.com/kompetenzbolzen/minecraft-server-tools
 
 ## Patch Notes 1.01 - 08/23/2020 ##
 
-* File - Server.sh *
-cd $(dirname $0) sets the current folder server.sh file resides in as the root folder
-This enables the code to be executed outside the root residing folder, resolving the issue of the minecraft service not starting up.
+File - Server.sh 
+`cd $(dirname $0) sets the current folder server.sh file resides in as the root folder. This enables the code to be executed outside the root residing folder, resolving the issue of the minecraft service not starting up.`
 
 
 ## Configuration

@@ -6,7 +6,7 @@ Description=Minecraft Server
 
 [Service]
 Type=forking
-PIDFile=/var/minecraft/minecraft-screen.pid
+PIDFile=/var/minecraft/minecraft-session.pid
 Restart=on-failure
 RestartSec=30s
 TimeoutStartSec=30

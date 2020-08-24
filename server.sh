@@ -1,9 +1,10 @@
 #!/bin/bash
 
-echo "Initialising..."
-
-# Set folder to root directory, this allows script execution from external directories 
 cd $(dirname $0)
+
+temp=$( realpath "$0"  ) && folderpath=$(dirname "$temp")
+
+echo "Initialising...MC server instance from " $folderpath
 
 if [ -e "serverconf.sh" ]
 then
@@ -101,42 +102,136 @@ function server_status() {
 }
 
 function players_online() {
-	send_cmd "list"
-	sleep 1
-	while [ $(tail -n 3 "$LOGFILE" | grep -c "There are") -lt 1 ]
-	do
-		sleep 1
-	done
 
-	[ `tail -n 3 "$LOGFILE" | grep -c "There are 0"` -lt 1 ]
+	#Check for active online players
+
+	send_cmd "list"	
+	
+	#grabs last line
+		
+	output=$(grep "players online." $LOGFILE | tail -n 1)	
+	
+		if [[ $output =~ "There are 0" ]]; then	
+	
+		echo "There are no players on the server."
+		return
+	
+	else			
+		echo "There are players on the server."		
+	fi	
+	
+	false
+	
 }
 
+function check_players() {
+
+	echo "Checking number of online players..."
+
+	failsafe=0
+	send_cmd "list"
+	
+	#Failsafe measure to ensure server prints the player count into chat logs. Wait on server 
+	
+		while [ $(tail -n 3 "$LOGFILE" | grep -c "players online") -lt 1 ]
+	do
+		echo "Still waiting on server response..."
+				
+		if [ $failsafe -ge 4 ]; then
+
+			echo "Retry limit reached."
+			echo "Unable to determine players online."
+				
+			exit
+			
+		else 	
+			failsafe=$(( failsafe+1 ))
+		fi
+	
+		sleep 1
+	done
+	
+	#On success, we now determine if there are 0 or more players. 
+	
+	output=$(grep "players online." $LOGFILE | tail -n 1)
+			
+		if [[ $output =~ "There are 0" ]]; then	
+	
+		echo "There are no players on the server."
+		return
+	
+	else			
+		echo "Players exist on the server"		
+		echo $output
+	fi	
+		
+	false
+	
+}
 
 function server_backup_safe() {
 	force=$1
+			
 	echo "Detected running server. Checking if players online..."
-	if [ "$force" != "true" ] && ! players_online; then
-		echo "Players are not online. Not backing up."
-		return
+	
+	# Call the function to check for players.
+		
+	if (! check_players) ; then
+	
+		if [[ $force == "true" ]]; then
+		
+			echo "Forced switch detected..."
+			echo "Backup will still continue with players in server..."
+	
+		else
+	
+			echo "There are currently players on the server, backup will now abort." 
+			echo "To force a backup session, use instead fbackup."
+			echo "Backup is aborting..."
+			
+			return
+		
+		fi	
+		
+	else 
+		
+		echo "Checking complete..."
+			
 	fi
 
-	echo "Disabling autosave"
+	echo "Disabling minecraft server autosave..."
 	send_cmd "save-off"
 	send_cmd "save-all flush"
 	echo "Waiting for save... If froze, run /save-on to re-enable autosave!!"
 	
 	sleep 1
+	
 	while [ $(tail -n 3 "$LOGFILE" | grep -c "Saved the game") -lt 1 ]
 	do
 		sleep 1
 	done
 	sleep 2
-	echo "Done! starting backup..."
+	
+	#Use Minecraft console command to broadcast backup start.
+	send_cmd "say Minecraft Tools will commence backup in ... 3"
+	sleep 1
+	send_cmd "say Minecraft Tools will commence backup in ... 2"
+	sleep 1
+	send_cmd "say Minecraft Tools will commence backup in ... 1"
+	sleep 1
+	send_cmd "say Minecraft Tools is backing up server. Please stand-by..."
+	
+	echo "Minecraft server instance is being written to local disk..."
 
 	if [ $USE_BUP = "YES" ]; then
-		create_bup_backup
+	
+		#create_bup_backup
+		echo "Hello"
+		
 	else
+	
 		create_backup_archive
+				
 	fi
 	
 	local RET=$?
@@ -144,10 +239,16 @@ function server_backup_safe() {
 	echo "Re-enabling auto-save"
 	send_cmd "save-on"
 
+	#echo $RET "status code..."
+
 	if [ $RET -eq 0 ]
 	then
-		echo Running backup hook
-		$BACKUP_HOOK
+		#echo Running backup hook
+		
+		#Return code 0 success
+		echo "Backup process has completed..."
+		send_cmd "say Minecraft Tools has successfully backed up the server. "
+		
 	fi
 }
 
@@ -189,17 +290,38 @@ function create_bup_backup() {
 }
 
 # TODO: Make default .tar with optional bup
-function create_backup_archive() {
-	ARCHNAME="backup/$WORLD_NAME-backup_`date +%d-%m-%y-%T`.tar.gz"
-	tar -czf "$ARCHNAME" "./$WORLD_NAME"
 
-	if [ ! $? -eq 0 ]
+function create_backup_archive() {
+
+	# Checks for existing directory.
+	# Current directory is hardcoded
+
+	#Directory is made incase it is missing.	
+	mkdir -p backups
+
+	ARCHNAME="backups/$WORLD_NAME-backup_`date +%d-%m-%y-%T`.tar.gz"
+	echo "Backup is in progress... This may take a while... please wait..."
+	
+	# TAR settings to exclude backup folder, so it doesn't back up itself adding file size.
+	tar --exclude=backups -czvf "$ARCHNAME" "$folderpath" 	
+
+	echo "Zip processes ended"
+
+	tarexitcode=$?
+
+	if [ $tarexitcode != 0 ] 
 	then
-		echo "TAR failed. No Backup created."
-		rm $ARCHNAME #remove (probably faulty) archive
-		return 1
+	
+		if [ $tarexitcode != 1 ] 
+		then	
+		echo "TAR failed. No Backup created."		
+		#rm $ARCHNAME #remove (probably faulty) archive
+		#return 1		
+		fi
+		
 	else
-		echo $ARCHNAME created.
+		echo "Minecraft server has successfully been backed up @ "
+		echo $ARCHNAME 
 	fi
 }
 
@@ -256,10 +378,12 @@ case $1 in
 	"backup")
 		server_backup
 		;;
-	# TODO: Add restore command
 	"status")
 		server_status
-		;;
+		;;		
+	"isempty")
+		check_players
+		;;		
 	"fbackup")
 		server_backup "true"
 		;;
@@ -267,6 +391,6 @@ case $1 in
 		ls_bup $2
 		;;
 	*)
-		echo "Usage: $0 start|stop|attach|status|backup"
+		echo "Usage: $0 start|stop|attach|status|backup|isempty"
 		;;
 esac

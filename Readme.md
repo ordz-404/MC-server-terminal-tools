@@ -1,5 +1,5 @@
-# Minecraft-server-tools by Jonas Gunz 
-Original Source code: https://github.com/kompetenzbolzen/minecraft-server-tools
+# MC-server Terminal Tools
+Original Source code and credits: https://github.com/kompetenzbolzen/minecraft-server-tools by Jonas Gunz 
 
 ## Platform Compatability
 Tested on Ubuntu 18.04

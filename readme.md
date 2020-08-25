@@ -1,10 +1,9 @@
-# Good Ol' Terminal Tools (GoTT)
+# Minecraft-server-tools
 Original Source code and credits: https://github.com/kompetenzbolzen/minecraft-server-tools by Jonas Gunz 
+This work has been moved to https://github.com/ordz-404/good-ol-terminal-tools/
 
 ## Platform Compatability
 Tested on Ubuntu 18.04
-
-Platform: AWS
 
 ## Setup & How to use
 

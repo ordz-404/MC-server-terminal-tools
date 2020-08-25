@@ -1,5 +1,6 @@
 # Minecraft-server-tools
-Original Source code and credits: https://github.com/kompetenzbolzen/minecraft-server-tools by Jonas Gunz 
+Original Source code and credits: https://github.com/kompetenzbolzen/minecraft-server-tools by Jonas Gunz
+ 
 This work has been moved to https://github.com/ordz-404/good-ol-terminal-tools/
 
 ## Platform Compatability

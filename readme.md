@@ -46,8 +46,9 @@ The Author of this Software expressly disclaims any warranty for the SOFTWARE PR
 #### No Liability For Damages
 In no event shall the author of this Software be liable for any special, consequential, incidental or indirect damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or any other pecuniary loss) arising out of the use of or inability to use this product, even if the Author of this Software is aware of the possibility of such damages and known defects.
 
-### Attribution-NonCommercial - CC BY-NC
+### Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+CC-BY-NC-SA This license requires that reusers give credit to the creator. It allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, for noncommercial purposes only. If others modify or adapt the material, they must license the modified material under identical terms.
 
-https://licensebuttons.net/l/by-nc/3.0/88x31.png
-
-This license lets others remix, adapt, and build upon your work non-commercially, and although their new works must also acknowledge you and be non-commercial, they don’t have to license their derivative works on the same terms.
+BY: Credit must be given to you, the creator.
+NC: Only noncommercial use of your work is permitted.
+SA: Adaptations must be shared under the same terms.

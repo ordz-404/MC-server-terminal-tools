@@ -1,4 +1,4 @@
-# MC-Server Terminal Tools
+# Good Ol' Terminal Tools (GoTT)
 Original Source code and credits: https://github.com/kompetenzbolzen/minecraft-server-tools by Jonas Gunz 
 
 ## Platform Compatability

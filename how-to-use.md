@@ -1,27 +1,19 @@
-# minecraft-server-tools
-
-My minecraft server management script with safe online Backup.
-
-## Configuration
-
-Config-variables are located at the top of `server.sh`
-
-## Usage
+## Usage Parameters
 
 `./server.sh start|stop|attach|status|backup`
 
 ### start
 
-Creates a `screen` session and starts a minecraft server within.
-Fails, if a session is already running with the same sessionname.
+Creates a terminal multiplxer (tmux is different from screen) session and starts a minecraft server within.
+If a current instance is already running, the server will indicate. 
 
 ### stop
 
-Sends `stop` command to running server instance to safely shut down.
+Sends `stop` command to running minecraft server instance to safely shut down.
 
 ### attach
 
-attaches to `screen` session. Exit with `CTRL + A d`
+Re attaches to a TMUX screen session if the server is running. To exit, press `CTRL + B ` together follwed by `b` key.
 
 ### status
 
@@ -55,10 +47,3 @@ sudo sytemctl start mc-backup.timer
 
 This wil start the enable the timer upon startup and start the timer
 to run the backup after every interval specified in mc-backup.timer.
-
-## Disclaimer
-
-The scripts are provided as-is at no warranty.
-They are in no way idiot-proof.
-
-Improvements are welcome.

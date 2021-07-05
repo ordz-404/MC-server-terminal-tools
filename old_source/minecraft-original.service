@@ -1,15 +1,15 @@
 # minecraft.service
-# PIDFile needs to match name in serverconf.sh
 
 [Unit] 
 Description=Minecraft Server
 
 [Service]
 Type=forking
-PIDFile=/var/minecraft/minecraft-session.pid
+User=minecraft
+Group=minecraft
+PIDFile=/var/minecraft/server-screen.pid
 Restart=on-failure
 RestartSec=30s
-TimeoutStartSec=30
 ExecStart=/var/minecraft/server.sh start
 TimeoutStopSec= 180
 ExecStop=/var/minecraft/server.sh stop
